@@ -1,5 +1,7 @@
 package parser.data
 
+import com.google.gson.annotations.SerializedName
+
 data class Coord(
-        var longitude: String = "",
-        var latitude: String = "")
+        @SerializedName("longitude") var longitude: String = "",
+        @SerializedName("latitude") var latitude: String = "")

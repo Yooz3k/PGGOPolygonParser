@@ -1,6 +1,11 @@
 package parser.data
 
+import com.google.gson.annotations.SerializedName
+
 data class Building(
-        var number: List<Int>? = null,
-        var name: String = "",
-        var coords: List<Coord>? = null)
+        @SerializedName("id") var id: Int? = null,
+        @SerializedName("buildingId") var buildingId: Int? = null,
+        @SerializedName("number") var number: List<Int>? = null,
+        @SerializedName("tag") var tag: String = "",
+        @SerializedName("name") var name: String = "",
+        @SerializedName("coordinates") var coords: List<Coord>? = null)
