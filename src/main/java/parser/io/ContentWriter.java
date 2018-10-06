@@ -1,19 +1,16 @@
 package parser.io;
 
+import com.google.gson.Gson;
 import parser.data.Building;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ContentWriter {
 
-    private List<Building> buildings = new ArrayList<>();
+    public void formatFile(List<Building> buildings) {
+        Gson gson = new Gson();
+        String json = gson.toJson(buildings);
 
-    public void addBuilding(Building building) {
-        buildings.add(building);
-    }
-
-    public void saveFile() {
-        new FileWriter().saveFile(buildings);
+        new FileWriter().saveFile(json);
     }
 }

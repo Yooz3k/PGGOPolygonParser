@@ -8,7 +8,7 @@ import java.util.List;
 
 public class FileReader {
 
-    private String directory = "G:\\PG\\INZYNIERKA\\polygony";
+    private String directory = "D:\\PG\\INZYNIERKA\\Polygon-parser pliki";
 
     private String fileName = "budynki-wspolrzedne.txt";
 

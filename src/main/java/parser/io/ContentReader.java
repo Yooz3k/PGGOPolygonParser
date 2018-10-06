@@ -10,9 +10,7 @@ import java.util.List;
 public class ContentReader {
 
     public void readFileContent(List<String> buildingInfo) {
-
-        ContentWriter cw = new ContentWriter();
-
+        List<Building> buildings = new ArrayList<>();
         Building building = null;
         List<Coord> coords = null;
 
@@ -26,12 +24,12 @@ public class ContentReader {
             } else if (line.contains(",")) {
                 coords.add(extractCoords(line));
                 if (line.contains(";")) {
-                    cw.addBuilding(building);
+                    buildings.add(building);
                 }
             }
         }
 
-        cw.saveFile();
+        new ContentWriter().formatFile(buildings);
     }
 
     private String extractBuildingName(String line) {
