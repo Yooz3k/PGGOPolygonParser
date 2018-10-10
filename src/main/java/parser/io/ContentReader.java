@@ -5,12 +5,18 @@ import parser.data.Building;
 import parser.data.Coord;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class ContentReader {
 
+    private Map<String, List<Building>> buildingsForTag;
+
     public void readFileContent(List<String> buildingInfo) {
-        List<Building> buildings = new ArrayList<>();
+        buildingsForTag = new HashMap<>();
         Building building = null;
         List<Coord> coords = null;
 
@@ -20,16 +26,16 @@ public class ContentReader {
                 coords = new ArrayList<>();
 
                 building.setName(extractBuildingName(line));
-                building.setNumber(extractBuildingNumber(line));
+                building.setNumbers(extractBuildingNumbers(line));
             } else if (line.contains(",")) {
                 coords.add(extractCoords(line));
                 if (line.contains(";")) {
-                    buildings.add(building);
+                    addBuildingToMap(building);
                 }
             }
         }
 
-        new ContentWriter().formatFile(buildings);
+        new ContentWriter().formatFile(buildingsForTag);
     }
 
     private String extractBuildingName(String line) {
@@ -37,18 +43,18 @@ public class ContentReader {
         return line.substring(0, spaceIndex);
     }
 
-    private List<Integer> extractBuildingNumber(String line) {
+    private List<Integer> extractBuildingNumbers(String line) {
         int openingBracketIndex = line.indexOf("[");
         int closingBracketIndex = line.indexOf("]");
 
         if (!line.contains("-")) { //Budynek posiada 1 numer
             String number = line.substring(openingBracketIndex, closingBracketIndex);
             return Lists.newArrayList(Integer.parseInt(number));
-        } else { //Budynek posiada 2 numery
+        } else { //Budynek posiada więcej niż 1 numer
             int separatorIndex = line.indexOf("-");
-            String firstNumber = line.substring(openingBracketIndex, separatorIndex);
-            String secondNumber = line.substring(separatorIndex+1, closingBracketIndex);
-            return Lists.newArrayList(Integer.parseInt(firstNumber), Integer.parseInt(secondNumber));
+            Integer firstNumber = Integer.parseInt(line.substring(openingBracketIndex, separatorIndex));
+            Integer secondNumber = Integer.parseInt(line.substring(separatorIndex+1, closingBracketIndex));
+            return IntStream.rangeClosed(firstNumber, secondNumber).boxed().collect(Collectors.toList());
         }
     }
 
@@ -59,5 +65,18 @@ public class ContentReader {
         String latitude = line.substring(commaIndex+2, newLineIndex);
 
         return new Coord(longitude, latitude);
+    }
+
+    private void addBuildingToMap(Building building) {
+        String buildingTag = building.getTag();
+
+        if (buildingsForTag.containsKey(buildingTag)) {
+            List<Building> buildings = buildingsForTag.get(buildingTag);
+            buildings.add(building);
+            buildingsForTag.put(buildingTag, buildings);
+        } else {
+            List<Building> buildings = Lists.newArrayList(building);
+            buildingsForTag.put(buildingTag, buildings);
+        }
     }
 }
