@@ -1,7 +1,8 @@
 package parser.data
 
 import com.google.gson.annotations.SerializedName
+import java.math.BigDecimal
 
 data class Coord(
-        @SerializedName("longitude") var longitude: String = "",
-        @SerializedName("latitude") var latitude: String = "")
+        @SerializedName("longitude") var longitude: BigDecimal = BigDecimal.ZERO,
+        @SerializedName("latitude") var latitude: BigDecimal = BigDecimal.ZERO)

@@ -10,7 +10,7 @@ public class FileWriter {
 
     private static final Logger LOGGER = Logger.getLogger(FileWriter.class.getName());
 
-    private static final String FILE_PATH = "D:\\PG\\INZYNIERKA\\Polygon-parser-pliki";
+    private static final String FILE_PATH = "G:\\PG\\INZYNIERKA\\Polygon-parser-pliki";
     private static final String DIRECTORY_PREFIX = "JSON_";
     private static final String FILENAME = "building_displays";
 //    private String fileExtension = ".txt";
@@ -21,7 +21,7 @@ public class FileWriter {
         System.out.println("DIRECTORY TO_STRING: " + directory.toString());
 
         try {
-            Files.write(Paths.get(FILE_PATH, directory.toString(), FILENAME), json.getBytes());
+            Files.write(Paths.get(directory.toString(), FILENAME), json.getBytes());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -29,6 +29,8 @@ public class FileWriter {
 
     private Path prepareDirectory(String directoryTag) {
         StringBuilder dir = new StringBuilder();
+        dir.append(FILE_PATH);
+        dir.append("\\");
         dir.append(DIRECTORY_PREFIX);
         dir.append(directoryTag);
 

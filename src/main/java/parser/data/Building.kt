@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class Building(
         @SerializedName("id") var id: Int? = null,
-        @SerializedName("buildingId") var buildingId: Int? = null,
+        @SerializedName("buildingId") var buildingId: Int? = 11111,
         @SerializedName("number") var numbers: List<Int>? = null,
         @SerializedName("tag") var tag: String = "",
         @SerializedName("name") var name: String = "",

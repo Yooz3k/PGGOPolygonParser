@@ -12,11 +12,16 @@ public class ContentWriter {
         Gson gson = new Gson();
         FileWriter fw = new FileWriter();
 
-        buildings.keySet()
+        /*buildings.keySet()
                 .stream()
                 .forEach(t -> {
                     String json = gson.toJson(buildings.get(t));
                     fw.saveFile(json, t);
-                });
+                });*/
+
+        for (String t : buildings.keySet()) {
+            String json = gson.toJson(buildings.get(t));
+            fw.saveFile(json, t);
+        }
     }
 }
