@@ -45,7 +45,7 @@ public class ContentReader {
         Building building = new Building();
 
         building.setName(extractBuildingName(line));
-        building.setNumbers(extractBuildingNumbers(line));
+//        building.setNumbers(extractBuildingNumbers(line));
         building.setTag(extractBuildingTag(line));
         building.setId(generateBuildingId());
 
