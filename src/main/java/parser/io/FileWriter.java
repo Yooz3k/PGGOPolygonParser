@@ -13,7 +13,6 @@ public class FileWriter {
     private static final String FILE_PATH = "G:\\PG\\INZYNIERKA\\Polygon-parser-pliki";
     private static final String DIRECTORY_PREFIX = "JSON_";
     private static final String FILENAME = "building_displays";
-//    private String fileExtension = ".txt";
 
     public void saveFile(String json, String directoryTag) {
         Path directory = prepareDirectory(directoryTag);
@@ -54,14 +53,4 @@ public class FileWriter {
             }
         }
     }
-/*
-    private String prepareFilename() {
-        StringBuilder filename = new StringBuilder();
-        filename.append(filenamePrefix);
-        filename.append("_");
-        filename.append(new Date().toString());
-//        filename.append(fileExtension);
-
-        return filename.toString();
-    }*/
 }

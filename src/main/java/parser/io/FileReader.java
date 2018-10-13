@@ -8,12 +8,11 @@ import java.util.List;
 
 public class FileReader {
 
-    private String directory = "G:\\PG\\INZYNIERKA\\Polygon-parser-pliki";
-
-    private String fileName = "budynki-wspolrzedne.txt";
+    private final static String FILE_PATH = "G:\\PG\\INZYNIERKA\\Polygon-parser-pliki";
+    private final static String FILENAME = "budynki-wspolrzedne.txt";
 
     public void readFile() {
-        Path path = Paths.get(directory, fileName);
+        Path path = Paths.get(FILE_PATH, FILENAME);
 
         try {
             List<String> coords = Files.readAllLines(path);
